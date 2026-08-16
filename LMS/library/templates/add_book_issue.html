@@ -50,11 +50,9 @@
             if(input !== "" && (item.toLowerCase().indexOf(input)>-1 )){
                     var list_added = document.createElement("label");
                     list_added.appendChild(document.createTextNode(item));
-                    list_added.onclick =function(){
-                        items.children[get_clicked_value(this.innerHTML)].setAttribute("selected",true);
+                   list_added.onclick =function(){
+                        items.value = get_clicked_value(this.innerHTML);
                         view.style.display="none";
-                        // uncomment below line to hide the search input after selection is made
-                        // document.getElementById('quick').style.display="none";
                     };
                     view.appendChild(list_added);
                     view.style.display="block";
@@ -87,12 +85,13 @@
             if((input.value.toLowerCase() !== "") && (item.toLowerCase().indexOf(input.value.toLowerCase())>-1 ) ){
                 var list_added = document.createElement("label");
                 list_added.appendChild(document.createTextNode(item));
-                list_added.onclick =function(){
-                    select_clicked_book(this.innerHTML);
-                    view.style.display="none";
-                    // comment below line to unhide the search input after selection is made
-                    input.style.display="none"; input.value="";
-                };
+              list_added.onclick =function(){
+                        select_clicked_book(this.innerHTML);
+                        view.style.display="none";
+                        input.style.display="none"; input.value="";
+                    };
+                   
+              
                 view.appendChild(list_added);
                 view.style.display="block";
             }
@@ -101,12 +100,12 @@
             }
         }
     }
-    function select_clicked_book(clicked){
-        var books = document.getElementById('id_book_instance');   
+   function select_clicked_book(clicked){
+        var books = document.getElementById('id_book_instance');
         for(i=1;i<books.children.length.valueOf();i++){
             var item=books.children[i];
                 if (item.innerHTML == clicked ) {
-                    item.setAttribute("selected",true);
+                    books.value = item.value;
                 }
         }
     }

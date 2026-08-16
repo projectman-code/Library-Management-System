@@ -136,3 +136,10 @@ def edit_issued(request, id):
             return render(request,'edit_issued.html',{'issue':issue})
     except Exception as error:
         print(f"{error} occured at edit_issued view")
+
+def delete_issued(request, id):
+    issue = Book_Issue.objects.get(id=id)
+    issue.book_instance.Is_borrowed = False
+    issue.book_instance.save()
+    issue.delete()
+    return redirect('/view_books_issued')
